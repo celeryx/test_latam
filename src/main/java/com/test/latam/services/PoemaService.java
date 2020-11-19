@@ -29,22 +29,20 @@ public class PoemaService {
 
         Map<String, String> mapaNombres = psu.obtenerNombres(nombres);
         Map<String, String> mapaApellidos = psu.obtenerApellidos(apellidos);
-        log.info(mapaNombres.get("primerNombre"));
-        int edad = psu.ObtenerEdad();
+        int edad = psu.ObtenerEdad(fechaN);
         int diasProxCumple = psu.obtenerDiasRestantesCumple(fechaN);
-        log.info("DIAS :: "+ diasProxCumple);
-        String poema = "";
-        if (diasProxCumple == 0) {
-            poema = rpc.obtenerPoema();
-            log.info("POEMA ::: "+ poema);
-        }
+        String poema = diasProxCumple <= 0 ? rpc.obtenerPoema() : "";
+        String mensajeFelicitacion = diasProxCumple <= 0
+                                   ? "Feliz Cumpleaños, muchas felicidades por haber cumplido " + edad + " años"
+                                   : "";
 
+        String msjProximoCumple = diasProxCumple <= 0 ? "" : "Faltan " + diasProxCumple + " dias para su cumpleaños";
         PoemaRS poemaRS = new PoemaRS();
         Persona persona = crearPersona(mapaNombres, mapaApellidos, edad, fechaN);
-        poemaRS.setDiasRestantesCumpleanos(diasProxCumple);
+        poemaRS.setDiasRestantesCumpleanos(msjProximoCumple);
         poemaRS.setPoema(poema);
         poemaRS.setPersona(persona);
-        poemaRS.setMensajeFelicitacion("Feliz Cumpleaños, muchas felicidades por haber cumplido " + edad + " años");
+        poemaRS.setMensajeFelicitacion(mensajeFelicitacion);
         return poemaRS;
     }
 

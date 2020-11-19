@@ -19,18 +19,20 @@ public class PoemaServiceUtils {
     public Map<String, String> obtenerNombres(String nombres) {
         HashMap<String,String> mapaNombres = new HashMap<>();
         String[] nombresL = nombres.split(" ");
-        log.info(nombresL[0]);
-        log.info(nombresL[1]);
-        mapaNombres.put("primerNombre",nombresL[0].trim());
-        mapaNombres.put("segundoNombre",nombresL[1].trim());
+        String primerNombre = nombresL.length > 0 ? nombresL[0].trim() : "";
+        String segundoNombre = nombresL.length > 1 ? nombresL[1].trim() : "";
+        mapaNombres.put("primerNombre",primerNombre);
+        mapaNombres.put("segundoNombre",segundoNombre);
         return mapaNombres;
     }
 
     public Map<String, String> obtenerApellidos(String apellidos) {
         HashMap<String,String> mapaApellidos = new HashMap<>();
         String[] apellidosL = apellidos.trim().split(" ");
-        mapaApellidos.put("apellidoPaterno",apellidosL[0].trim());
-        mapaApellidos.put("apellidoMaterno",apellidosL[1].trim());
+        String apellidoPaterno = apellidosL.length > 0 ? apellidosL[0].trim() : "";
+        String apellidoMaterno = apellidosL.length > 1 ? apellidosL[1].trim() : "";
+        mapaApellidos.put("apellidoPaterno",apellidoPaterno);
+        mapaApellidos.put("apellidoMaterno",apellidoMaterno);
         return mapaApellidos;
     }
 
@@ -51,7 +53,11 @@ public class PoemaServiceUtils {
         return diasRestantes;
     }
 
-    public int ObtenerEdad() {
-        return 2;
+    public int ObtenerEdad(String fechaN) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate fechaNacimiento = LocalDate.parse ( fechaN, formatter );
+        ZoneId  idZona = ZoneId.systemDefault();
+        LocalDate fechaH = LocalDate.now ( idZona );
+        return Period.between(fechaNacimiento, fechaH).getYears();
     }
 }

@@ -27,34 +27,36 @@ public class PoemaController {
 
     @PostMapping("/poema")
     public ResponseEntity<PoemaRS> poema(@Valid @RequestBody PoemaRQ req){
-        return new ResponseEntity<>(poemaService.obtenerPoema(req), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(poemaService.obtenerPoema(req), HttpStatus.OK);
     }
 
     @GetMapping("/poema")
     public ResponseEntity<PoemaRS> poema(@RequestParam
                                          @NotNull
-                                         @NotBlank(message = "No debe estar vacio")
-                                         @NotEmpty(message = "El nombre no debe estar vacio")
-                                         @Pattern(regexp = "[A-Za-zÀ-ÖØ-öø-ÿ]",
-                                                  message = "El formato del nombre es invalido")
+                                         @NotBlank(message = "El parametro nombres no debe estar vacio")
+                                         @NotEmpty(message = "El parametro nombres no debe estar vacio")
+                                         @Pattern(regexp = "(([A-Za-zÀ-ÖØ-öø-ÿ]*)(\\s?)([A-Za-zÀ-ÖØ-öø-ÿ]*?))$",
+                                                  message = "El formato del parametro nombres es invalido " +
+                                                            "\nmaximo dos nombres")
                                          String nombres,
 
                                          @RequestParam
                                          @NotNull
-                                         @NotBlank(message = "No debe estar vacio")
-                                         @NotEmpty(message = "El apellido no debe estar vacio")
-                                         @Pattern(regexp = "[A-Za-zÀ-ÖØ-öø-ÿ]",
-                                                 message = "El formato del apellido es invalido")
+                                         @NotBlank(message = "El parametro apellidos no debe estar vacio")
+                                         @NotEmpty(message = "El parametro apellidos no debe estar vacio")
+                                         @Pattern(regexp = "(([A-Za-zÀ-ÖØ-öø-ÿ]*)(\\s?)([A-Za-zÀ-ÖØ-öø-ÿ]*?))$",
+                                                 message = "El formato del parametro apellidos es invalido" +
+                                                            "\nmaximo dos apellidos")
                                          String apellidos,
 
                                          @RequestParam
                                          @NotNull
-                                         @NotBlank(message = "No debe estar vacio")
-                                         @NotEmpty(message = "La fecha no debe estar vacia")
+                                         @NotBlank(message = "El parametro fechaNacimiento no debe estar vacio")
+                                         @NotEmpty(message = "El parametro fechaNacimiento no debe estar vacio")
                                          @Pattern(regexp = "^\\d{2}-\\d{2}-\\d{4}$",
-                                                  message = "El formato de la fecha es invalido, el formato es: DD-MM-AAAA")
+                                                  message = "El formato del parametro fechaNacimiento es invalido, el formato debe ser: DD-MM-AAAA")
                                          String fechaNacimiento) {
 
-        return new ResponseEntity<>(poemaService.obtenerPoema(nombres, apellidos, fechaNacimiento), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(poemaService.obtenerPoema(nombres, apellidos, fechaNacimiento), HttpStatus.OK);
     }
 }

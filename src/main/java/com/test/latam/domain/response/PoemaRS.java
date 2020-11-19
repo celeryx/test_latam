@@ -13,7 +13,7 @@ import lombok.ToString;
 public class PoemaRS {
 
     private Persona persona;
-    private int diasRestantesCumpleanos;
+    private String diasRestantesCumpleanos;
     private String poema;
     private String mensajeFelicitacion;
 }
