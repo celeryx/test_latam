@@ -26,8 +26,9 @@ public class RandomPoemsClient {
 
         WebClient poemasAzar = WebClient.create(host + api + path);
         Poema[] respuesta = poemasAzar.get().exchange().block().bodyToMono(Poema[].class).block();
-        int azar = new Random().nextInt(respuesta.length);
-        return respuesta[azar].getContent();
+        int azar = respuesta.length > 0 ? new Random().nextInt(respuesta.length) : 0;
+        String poema = azar > 0 ? respuesta[azar].getContent() : "";
+        return poema;
     }
 
 
