@@ -1,10 +1,9 @@
 package com.test.latam.controllers;
 
-import com.test.latam.domain.entities.Poema;
 import com.test.latam.domain.request.PoemaRQ;
 import com.test.latam.domain.response.PoemaRS;
 import com.test.latam.services.PoemaService;
-import lombok.extern.java.Log;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@Log
 @RestController
 @Validated
 public class PoemaController {
@@ -30,6 +28,7 @@ public class PoemaController {
         return new ResponseEntity<>(poemaService.obtenerPoema(req), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/poema")
     public ResponseEntity<PoemaRS> poema(@RequestParam
                                          @NotNull

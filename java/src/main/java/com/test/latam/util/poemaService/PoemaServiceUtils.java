@@ -1,18 +1,15 @@
 package com.test.latam.util.poemaService;
 
-import com.test.latam.domain.response.PoemaRS;
-import lombok.extern.java.Log;
-import org.joda.time.DateTime;
+import com.test.latam.domain.entities.Persona;
+
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-@Log
+
 @Component
 public class PoemaServiceUtils {
 
@@ -59,5 +56,17 @@ public class PoemaServiceUtils {
         ZoneId  idZona = ZoneId.systemDefault();
         LocalDate fechaH = LocalDate.now ( idZona );
         return Period.between(fechaNacimiento, fechaH).getYears();
+    }
+
+    public Persona crearPersona(Map<String, String> mapaNombres, Map<String, String> mapaApellidos,
+                                 int edad, String fechaN) {
+        Persona persona = new Persona();
+        persona.setPrimerNombre(mapaNombres.get("primerNombre"));
+        persona.setSegundoNombre(mapaNombres.get("segundoNombre"));
+        persona.setApellidoPaterno(mapaApellidos.get("apellidoPaterno"));
+        persona.setApellidoMaterno(mapaApellidos.get("apellidoMaterno"));
+        persona.setEdad(edad);
+        persona.setFechaNacimiento(fechaN.replaceAll("-", "/"));
+        return persona;
     }
 }
