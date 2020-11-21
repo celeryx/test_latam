@@ -12,16 +12,10 @@ export class ResultadoComponent implements OnInit {
   poemaRS: PoemaResponseModel;
 
   constructor(private poemaService: PoemaService) {
-    console.log('AKA');
   }
 
   ngOnInit(): void {
-    console.log('AKA');
     this.poemaRS = this.poemaService.poemaRS;
-    console.log(this.poemaRS);
   }
 
-  cambiarModo() {
-
-  }
 }

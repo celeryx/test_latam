@@ -22,6 +22,6 @@ public class Persona {
     @NotNull
     private String apellidoMaterno;
     private int edad;
-    @NotNull(message = "UEIWIUEUQUIWEUIWQUIEUIWQWUIEUIWQ")
+    @NotNull(message = "")
     private String fechaNacimiento;
 }

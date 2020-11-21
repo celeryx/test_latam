@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PoemaService} from '../../services/poema.service';
 import {Router} from '@angular/router';
+import {SnackbarCustomService} from "../../services/snackbar-custom.service";
+import {SnackTypesEnum} from "../../enums/snack-types.enum";
+import {Subject, Subscription} from "rxjs";
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-formulario',
@@ -13,10 +18,27 @@ export class FormularioComponent implements OnInit {
   apellidos: string;
   nombres: string;
   loading = false;
+  camposValidos = false ;
+  formularioValido = new Map<string, boolean>();
+  subjectFormularioValido = new Subject();
+  public keyUp = new Subject<any>();
+  private subscription: Subscription;
 
-  constructor(private poemaService: PoemaService, private router: Router) { }
+  constructor(private poemaService: PoemaService, private router: Router,
+              private snackbar: SnackbarCustomService) {
+
+    this.subscription = this.keyUp.pipe(
+      map((event:any) => event ),
+      debounceTime(700),
+      distinctUntilChanged()
+    ).subscribe(res => {
+      this.validacion(res.tipo, res.nombreCampo)
+    });
+
+  }
 
   ngOnInit(): void {
+    this.suscripcionValidarFormulario();
   }
 
   cambiarModo() {
@@ -79,4 +101,41 @@ export class FormularioComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  validacion(tipo: string, nombreCampo: string) {
+
+    const regexpTexto = new RegExp('((^[A-Za-zÀ-ÖØ-öø-ÿ]*)(\\s?)([A-Za-zÀ-ÖØ-öø-ÿ]*?))$');
+    const regexpFecha = new RegExp('^\\d{2}-\\d{2}-\\d{4}$');
+    const regexp = nombreCampo === 'fechaNacimiento' ? regexpFecha : regexpTexto;
+
+    // @ts-ignore
+    if (this[nombreCampo] !== undefined
+    // @ts-ignore
+    && this[nombreCampo] !== ''
+    // @ts-ignore
+    && regexp.test(this[nombreCampo])) {
+
+      this.subjectFormularioValido.next({tipo: tipo, valor: true})
+    } else {
+      this.snackbar.openSnackBar(tipo + ' no tiene un formato correcto','', SnackTypesEnum.ERROR);
+      this.subjectFormularioValido.next({tipo: tipo, valor: false})
+    }
+  }
+
+  private suscripcionValidarFormulario() {
+    this.subjectFormularioValido
+    .subscribe( (res: any) => {
+      this.formularioValido.set(res.tipo, res.valor);
+      if (this.formularioValido.size === 3) {
+        const valores = Array.from(this.formularioValido.values());
+        this.camposValidos = !(valores.filter(valor => valor === false).length > 0);
+      } else {
+        this. camposValidos = false
+      }
+    });
+  }
+
+
+
+
 }

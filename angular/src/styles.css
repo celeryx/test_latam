@@ -1,1 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.cdk-overlay-container {
+
+  max-width: 56rem;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cdk-global-overlay-wrapper {
+  transform: translate(-10%, 0%);
+}
+
+@media (min-width: 1024px) {
+  .cdk-global-overlay-wrapper {
+    width: 60%;
+  }
+}
+
+.mat-snack-bar-container {
+  min-width: 0px!important;
+  padding-right: 28px!important;
+  background: black;
+}
+
+div[id^="cdk-overlay"] {
+  position: fixed!important;
+  left: 16%;
+  top: 50%;
+  animation: heartBeat;
+  animation-duration: 5s;
+}
+
+@media (max-width: 640px) {
+  div[id^="cdk-overlay"] {
+    max-width: 345px;
+  }
+  .cdk-overlay-container {
+    min-height: 129%;
+  }
+}
+
+
+html {
+  height: 130%;
+}
+
+body {
+  max-height: 90%;
+}

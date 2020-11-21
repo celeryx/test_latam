@@ -9,22 +9,31 @@ import {FormsModule} from '@angular/forms';
 import {PoemaService} from './services/poema.service';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxLoadingModule} from 'ngx-loading';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MatSnackBarModule} from '@angular/material/snack-bar'
+import {SnackbarCustomComponent} from "./components/util/snackbar-custom/snackbar-custom.component";
+import {MatIconModule} from "@angular/material/icon";
+import {SnackbarCustomService} from "./services/snackbar-custom.service";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FormularioComponent,
-    ResultadoComponent
+    ResultadoComponent,
+    SnackbarCustomComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatIconModule
   ],
-  providers: [PoemaService],
+  providers: [PoemaService,SnackbarCustomService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

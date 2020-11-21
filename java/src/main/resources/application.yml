@@ -1,2 +1,4 @@
 server:
   port: 8090
+api:
+  poemas: https://www.poemist.com/api/v1/randompoems

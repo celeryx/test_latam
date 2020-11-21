@@ -1,72 +1,85 @@
 package com.test.latam.util.poemaService;
 
+import com.test.latam.constants.Constants;
 import com.test.latam.domain.entities.Persona;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.MonthDay;
+import java.time.Period;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Component
 public class PoemaServiceUtils {
 
-    public Map<String, String> obtenerNombres(String nombres) {
-        HashMap<String,String> mapaNombres = new HashMap<>();
-        String[] nombresL = nombres.split(" ");
-        String primerNombre = nombresL.length > 0 ? nombresL[0].trim() : "";
-        String segundoNombre = nombresL.length > 1 ? nombresL[1].trim() : "";
-        mapaNombres.put("primerNombre",primerNombre);
-        mapaNombres.put("segundoNombre",segundoNombre);
-        return mapaNombres;
-    }
+    public Map<String, String> obtenerNombresOApellidos(String texto, String constanteA, String constanteB) {
 
-    public Map<String, String> obtenerApellidos(String apellidos) {
-        HashMap<String,String> mapaApellidos = new HashMap<>();
-        String[] apellidosL = apellidos.trim().split(" ");
-        String apellidoPaterno = apellidosL.length > 0 ? apellidosL[0].trim() : "";
-        String apellidoMaterno = apellidosL.length > 1 ? apellidosL[1].trim() : "";
-        mapaApellidos.put("apellidoPaterno",apellidoPaterno);
-        mapaApellidos.put("apellidoMaterno",apellidoMaterno);
-        return mapaApellidos;
+        HashMap<String,String> mapa = new HashMap<>();
+        String[] textoL = texto.split(Constants.ESPACIO_BLANCO);
+        String texto1 = textoL.length > 0 ? textoL[0].trim() : StringUtils.EMPTY;
+        String texto2 = textoL.length > 1 ? textoL[1].trim() : StringUtils.EMPTY;
+        mapa.put(constanteA,texto1);
+        mapa.put(constanteB,texto2);
+
+        return mapa;
     }
 
     public int obtenerDiasRestantesCumple(String fechaN) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate fechaNacimiento = LocalDate.parse ( fechaN, formatter );
-        ZoneId  idZona = ZoneId.systemDefault();
-        LocalDate fechaH = LocalDate.now ( idZona );
+        LocalDate fechaNacimiento = formatearFecha(fechaN, Constants.FORMATO_FECHA_DDMMAAAA);
+        LocalDate fechaH = obtenerFechaHoy();
         int year = fechaH.getYear ();
         MonthDay monthDayOfBirth = MonthDay.from ( fechaNacimiento );
         LocalDate proximoCumple = monthDayOfBirth.atYear ( year );
-
-        if ( proximoCumple.isBefore ( fechaH ) ) {
-            proximoCumple = proximoCumple.plusYears ( 1 );
-        }
+        proximoCumple = proximoCumple.isBefore(fechaH) ? proximoCumple.plusYears ( 1 ) : proximoCumple;
         int diasRestantes = (int)ChronoUnit.DAYS.between(fechaH, proximoCumple);
+
         return diasRestantes;
     }
 
     public int ObtenerEdad(String fechaN) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate fechaNacimiento = LocalDate.parse ( fechaN, formatter );
-        ZoneId  idZona = ZoneId.systemDefault();
-        LocalDate fechaH = LocalDate.now ( idZona );
+
+        LocalDate fechaNacimiento = formatearFecha(fechaN, Constants.FORMATO_FECHA_DDMMAAAA);
+        LocalDate fechaH = obtenerFechaHoy();
+
         return Period.between(fechaNacimiento, fechaH).getYears();
     }
 
+    public LocalDate formatearFecha(String fecha, String formato){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
+        LocalDate fechaFinal = LocalDate.parse ( fecha, formatter );
+
+        return fechaFinal;
+    }
+
+    public LocalDate obtenerFechaHoy(){
+
+        ZoneId idZona = ZoneId.systemDefault();
+        LocalDate fechaH = LocalDate.now ( idZona );
+
+        return fechaH;
+    }
+
     public Persona crearPersona(Map<String, String> mapaNombres, Map<String, String> mapaApellidos,
-                                 int edad, String fechaN) {
+                                int edad, String fechaN) {
+
         Persona persona = new Persona();
-        persona.setPrimerNombre(mapaNombres.get("primerNombre"));
-        persona.setSegundoNombre(mapaNombres.get("segundoNombre"));
-        persona.setApellidoPaterno(mapaApellidos.get("apellidoPaterno"));
-        persona.setApellidoMaterno(mapaApellidos.get("apellidoMaterno"));
+        persona.setPrimerNombre(mapaNombres.get(Constants.PRIMER_NOMBRE));
+        persona.setSegundoNombre(mapaNombres.get(Constants.SEGUNDO_NOMBRE));
+        persona.setApellidoPaterno(mapaApellidos.get(Constants.APELLIDO_PATERNO));
+        persona.setApellidoMaterno(mapaApellidos.get(Constants.APELLIDO_MATERNO));
         persona.setEdad(edad);
-        persona.setFechaNacimiento(fechaN.replaceAll("-", "/"));
+        persona.setFechaNacimiento(fechaN.replaceAll(Constants.GUION, Constants.SLASH));
+
         return persona;
     }
+
 }

@@ -16,6 +16,6 @@ import javax.validation.constraints.NotNull;
 public class PoemaRQ {
 
     @Valid
-    @NotNull(message = "The author email '${validatedValue}' must be between {min} and {max} characters long")
+    @NotNull(message = "")
     private Persona persona;
 }

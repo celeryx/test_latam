@@ -1,4 +1,4 @@
-<div class="max-w-4xl flex items-center h-auto flex-wrap mx-auto my-32 lg:my-0">
+<div class="max-w-4xl flex items-center h-auto flex-wrap mx-auto my-16 lg:my-0 h-screen">
 
   <!--Main Col-->
   <div id="profile" class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-gray-900 opacity-75 mx-6 lg:mx-0">
@@ -6,20 +6,21 @@
 
     <div class="p-4 md:p-12 text-center lg:text-left">
       <!-- Image for mobile view-->
-      <div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/MP0IUfwrn0A')"></div>
+      <div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" style="background-image: url('../../../assets/images/women-profile.jfif')"></div>
 
       <h1 class="text-3xl font-bold pt-8 lg:pt-0 pb-3">Nombres</h1>
-      <input class="mx-auto lg:mx-0 w-4/5" placeholder="Ej: Juan Alberto" [(ngModel)]="nombres" />
+      <input class="mx-auto lg:mx-0 w-4/5" placeholder="Ej: Juan Alberto" [(ngModel)]="nombres" (change)="validacion('Nombre', 'nombres')"/>
       <div class="mx-auto lg:mx-0 w-4/5 border-b-2 border-teal-500 opacity-25 mb-8"></div>
       <h1 class="text-3xl font-bold pt-8 lg:pt-0 pb-3">Apellidos</h1>
-      <input class="mx-auto lg:mx-0 w-4/5" placeholder="Ej: Araya Rivera" [(ngModel)]="apellidos" />
+      <input class="mx-auto lg:mx-0 w-4/5" placeholder="Ej: Araya Rivera" [(ngModel)]="apellidos" (change)="validacion('Apellido',  'apellidos')" #input/>
       <div class="mx-auto lg:mx-0 w-4/5 border-b-2 border-teal-500 opacity-25 mb-8"></div>
       <h1 class="text-3xl font-bold pt-8 lg:pt-0 pb-3">Fecha Nacimiento</h1>
-      <input class="mx-auto lg:mx-0 w-4/5" placeholder="Ej: 20-12-1990" [(ngModel)]="fechaNacimiento"/>
+      <input class="mx-auto lg:mx-0 w-4/5" placeholder="Ej: 20-12-1990" [(ngModel)]="fechaNacimiento" (keyup)="keyUp.next({tipo: 'Fecha', nombreCampo: 'fechaNacimiento'})" #input/>
       <div class="mx-auto lg:mx-0 w-4/5 border-b-2 border-teal-500 opacity-25 mb-8"></div>
       <div class="mt-10 w-4/5 flex flex-col mx-auto lg:mx-0">
         <button id="enviarPoema" class="px-4 py-1 text-white font-light tracking-wider
-                    bg-white bg-opacity-25 rounded self-center" (click)="enviarFormulario()">
+                    bg-white bg-opacity-25 rounded self-center" (click)="enviarFormulario()"
+        *ngIf="camposValidos">
           Enviar
         </button>
       </div>
@@ -32,7 +33,7 @@
   <!--Img Col-->
   <div class="w-full lg:w-2/5">
     <!-- Big profile image for side bar (desktop) -->
-    <img src="https://source.unsplash.com/MP0IUfwrn0A" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block">
+    <img src="../../../assets/images/women-profile.jfif" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block">
     <!-- Image from: http://unsplash.com/photos/MP0IUfwrn0A -->
 
   </div>
