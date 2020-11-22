@@ -1,0 +1,31 @@
+version: '3.5'
+services:
+  latam-backend:
+    restart: always
+    container_name: latam-backend
+    build:
+      context: .
+      dockerfile: java.dockerfile
+    expose:
+      - "8090"
+    ports:
+      - "8090:8090"
+    networks:
+      - app-network
+  
+  latam-frontend:
+    restart: always
+    build:
+      context: .
+      dockerfile: angular.dockerfile
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+    depends_on:
+      - latam-backend
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

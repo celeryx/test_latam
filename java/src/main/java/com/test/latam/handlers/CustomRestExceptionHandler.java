@@ -5,6 +5,8 @@ import com.test.latam.constants.Constants;
 import com.test.latam.domain.entities.ApiError;
 
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -56,8 +58,8 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, apiError, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
-    @ExceptionHandler(value = {ConstraintViolationException.class})
-    protected ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException e, WebRequest request) {
+    @ExceptionHandler({ ConstraintViolationException.class })
+    public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException e, WebRequest request) {
 
         ApiError apiError = completarObjetoError(request);
 
