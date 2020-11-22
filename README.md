@@ -4,7 +4,7 @@
 
 Tener docker instalado (al menos version 2.2.0.3)
 Tener GIT instalado
-Puerto 80 y 8090 libres (servicio IIS puede estar ocupando el puerto 80)
+Puerto 80 y 8090 libres (servicio IIS puede estar ocupando el puerto 80):
     ``` Windows:
         CMD: para revisar ejecute el comando "netstat -a -b | findstr 80" (comando se ejecuta en CMD)
         POWERSHELL: para revisar ejecute el comando " Get-Process -Id (Get-NetTCPConnection -LocalPort 80).OwningProcess" (comando se ejecuta en la powershell)
@@ -30,7 +30,7 @@ En caso de estar los puertos en uso:
                Ejemplo de salida: 
                                 apache2   1607     root    3u  IPv4   6472      0t0  TCP *:www (LISTEN)
                                 apache2   1616 www-data    3u  IPv4   6472      0t0  TCP *:www (LISTEN) 
-                                apache2   1617 www-data    3u  IPv4   6472      0t0  TCP *:www (LISTEN)```
+                                apache2   1617 www-data    3u  IPv4   6472      0t0  TCP *:www (LISTEN) ```
 
 
 
