@@ -3,14 +3,10 @@
 
 ## Índice de contenidos
 * [Instrucciones](#item1)
-* [Contenido 2](#item2)
-* [Contenido 3](#item3)
-* [Contenido 4](#item4)
- 
-Lorem ipsum dolor
+* [Pre-Requisitos](#item2)
  
 <a name="item2"></a>
-**Pre-Requisito**
+### Pre-Requisitos
 
 Tener docker instalado 
 Tener docker-compose instalado
