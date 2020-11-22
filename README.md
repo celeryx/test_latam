@@ -7,16 +7,16 @@ Tener GIT instalado
 
 Puerto 80 y 8090 libres:
 ```     
-      Windows:
-                CMD: 
-                        Para revisar ejecute el comando "netstat -a -b | findstr 80" (comando se ejecuta en CMD)
+Windows:
+      CMD: 
+            Para revisar ejecute el comando "netstat -a -b | findstr 80" (comando se ejecuta en CMD)
                 
-                POWERSHELL: 
-                            Para revisar ejecute el comando " Get-Process -Id (Get-NetTCPConnection -LocalPort 80).OwningProcess" (comando se ejecuta en la powershell)
+      POWERSHELL: 
+            Para revisar ejecute el comando " Get-Process -Id (Get-NetTCPConnection -LocalPort 80).OwningProcess" (comando se ejecuta en la powershell)
         
-        Linux:
-                TERMINAL: 
-                            Para revisar ejecute el comando "netstat -tulpn | grep --color :80", tambien se puede usar el comando:  "lsof -i :80 | grep LISTEN" 
+      Linux:
+            TERMINAL: 
+                  Para revisar ejecute el comando "netstat -tulpn | grep --color :80", tambien se puede usar el comando:  "lsof -i :80 | grep LISTEN" 
 ```
 
 En caso de estar los puertos en uso:
