@@ -4,15 +4,22 @@
 ## Índice de contenidos
 * [Instrucciones](#item1)
 * [Pre-Requisitos](#item2)
+* [Revisar Puertos](#item3)
+* [Salida Comandos de Puertos](#item4)
  
 <a name="item2"></a>
 ### Pre-Requisitos
 
-Tener docker instalado 
-Tener docker-compose instalado
-Tener GIT instalado
+* Tener docker instalado 
+* Tener docker-compose instalado
+* Tener GIT instalado
+* Tener Puerto 80 y Puerto 8090 libres
 
-Puerto 80 y 8090 libres:
+
+
+
+<a name="item3"></a>
+### Revisar Puertos
 ```     
 Windows:
       CMD: 
@@ -26,7 +33,9 @@ Linux:
             Para revisar ejecute el comando "netstat -tulpn | grep --color :80", tambien se puede usar el comando:  "lsof -i :80 | grep LISTEN" 
 ```
 
-En caso de estar los puertos en uso:
+
+<a name="item4"></a>
+### Ejemplos Salida de Comandos
 ``` 
     Windows:
            CMD:
@@ -51,6 +60,9 @@ En caso de estar los puertos en uso:
 
 
 
+
+
+
 <a name="item1"></a>
 ### Instrucciones
 
@@ -61,5 +73,6 @@ En caso de estar los puertos en uso:
 * Cuando el comando termine de ejecutarse (puede tardarse bastante la primera vez que se ejecuta)
 * Cuando el comando haya finalizado ejecutar el siguiente comando: "docker-compose up"
 * En caso de fallar revise si cumple con los pre-requisitos
+
 
 [Subir](#top)
