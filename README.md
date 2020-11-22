@@ -2,7 +2,8 @@
 
 **Pre-Requisito**
 
-Tener docker instalado (al menos version 2.2.0.3)
+Tener docker instalado 
+Tener docker-compose instalado
 Tener GIT instalado
 
 Puerto 80 y 8090 libres:
@@ -44,12 +45,12 @@ En caso de estar los puertos en uso:
 
 
 
-Instrucciones
+**Instrucciones**
 
-Descargar repositorio, abriendo un terminal y pegando lo siguiente "git clone https://github.com/celeryx/test_latam.git"
-Entrar a la carpeta "test_latam"
-Abrir un terminal
-Ejecutar comando "docker-compose build"
-Cuando el comando termine de ejecutarse (puede tardarse bastante la primera vez que se ejecuta)
-Cuando el comando haya finalizado ejecutar el siguiente comando: "docker-compose up"
-En caso de fallar revise si cumple con los pre-requisitos
+*Descargar repositorio, abriendo un terminal y pegando lo siguiente "git clone https://github.com/celeryx/test_latam.git"
+*Entrar a la carpeta "test_latam"
+*Abrir un terminal
+*Ejecutar comando "docker-compose build"
+*Cuando el comando termine de ejecutarse (puede tardarse bastante la primera vez que se ejecuta)
+*Cuando el comando haya finalizado ejecutar el siguiente comando: "docker-compose up"
+*En caso de fallar revise si cumple con los pre-requisitos
