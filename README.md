@@ -4,12 +4,18 @@
 
 Tener docker instalado (al menos version 2.2.0.3)
 Tener GIT instalado
-Puerto 80 y 8090 libres (servicio IIS puede estar ocupando el puerto 80):
-    ``` Windows:
-        CMD: para revisar ejecute el comando "netstat -a -b | findstr 80" (comando se ejecuta en CMD)
-        POWERSHELL: para revisar ejecute el comando " Get-Process -Id (Get-NetTCPConnection -LocalPort 80).OwningProcess" (comando se ejecuta en la powershell)
-    Linux:
-        terminal: para revisar ejecute el comando "netstat -tulpn | grep --color :80", tambien se puede usar el comando:  "lsof -i :80 | grep LISTEN" 
+
+Puerto 80 y 8090 libres:
+  ```   Windows:
+                CMD: 
+                        Para revisar ejecute el comando "netstat -a -b | findstr 80" (comando se ejecuta en CMD)
+                
+                POWERSHELL: 
+                            Para revisar ejecute el comando " Get-Process -Id (Get-NetTCPConnection -LocalPort 80).OwningProcess" (comando se ejecuta en la powershell)
+        
+        Linux:
+                TERMINAL: 
+                            Para revisar ejecute el comando "netstat -tulpn | grep --color :80", tambien se puede usar el comando:  "lsof -i :80 | grep LISTEN" 
     ```
 
 En caso de estar los puertos en uso:
