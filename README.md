@@ -14,9 +14,9 @@ Windows:
       POWERSHELL: 
             Para revisar ejecute el comando " Get-Process -Id (Get-NetTCPConnection -LocalPort 80).OwningProcess" (comando se ejecuta en la powershell)
         
-      Linux:
-            TERMINAL: 
-                  Para revisar ejecute el comando "netstat -tulpn | grep --color :80", tambien se puede usar el comando:  "lsof -i :80 | grep LISTEN" 
+Linux:
+      TERMINAL: 
+            Para revisar ejecute el comando "netstat -tulpn | grep --color :80", tambien se puede usar el comando:  "lsof -i :80 | grep LISTEN" 
 ```
 
 En caso de estar los puertos en uso:
