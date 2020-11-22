@@ -6,7 +6,8 @@ Tener docker instalado (al menos version 2.2.0.3)
 Tener GIT instalado
 
 Puerto 80 y 8090 libres:
-  ```   Windows:
+```     
+      Windows:
                 CMD: 
                         Para revisar ejecute el comando "netstat -a -b | findstr 80" (comando se ejecuta en CMD)
                 
@@ -16,10 +17,11 @@ Puerto 80 y 8090 libres:
         Linux:
                 TERMINAL: 
                             Para revisar ejecute el comando "netstat -tulpn | grep --color :80", tambien se puede usar el comando:  "lsof -i :80 | grep LISTEN" 
-    ```
+```
 
 En caso de estar los puertos en uso:
-  ``` Windows:
+``` 
+    Windows:
            CMD:
                Ejemplo de salida:
                                   TCP    0.0.0.0:80             account:0              LISTENING
@@ -36,7 +38,8 @@ En caso de estar los puertos en uso:
                Ejemplo de salida: 
                                 apache2   1607     root    3u  IPv4   6472      0t0  TCP *:www (LISTEN)
                                 apache2   1616 www-data    3u  IPv4   6472      0t0  TCP *:www (LISTEN) 
-                                apache2   1617 www-data    3u  IPv4   6472      0t0  TCP *:www (LISTEN) ```
+                                apache2   1617 www-data    3u  IPv4   6472      0t0  TCP *:www (LISTEN)
+```
 
 
 
