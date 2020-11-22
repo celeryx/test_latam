@@ -3,6 +3,7 @@ import {PoemaRequestModel} from '../models/poema/poema-request.model';
 import {Observable} from 'rxjs';
 import {PoemaResponseModel} from '../models/poema/poema-response.model';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class PoemaService {
@@ -25,7 +26,7 @@ export class PoemaService {
                   .append('apellidos', data.apellidos)
                   .append('fechaNacimiento', data.fechaNacimiento);
 
-    return this.http.get<PoemaResponseModel>('http://localhost:8090/poema', {params});
+    return this.http.get<PoemaResponseModel>(environment.backend + '/poema', {params});
   }
 
   guardarRespuesta(res: PoemaResponseModel): void {
