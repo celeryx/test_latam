@@ -2,16 +2,14 @@
 # Birthday Calculator
 
 ## Índice de contenidos
-* [Contenido 1](#item1)
+* [Instrucciones](#item1)
 * [Contenido 2](#item2)
 * [Contenido 3](#item3)
 * [Contenido 4](#item4)
  
 Lorem ipsum dolor
  
-<a name="item1"></a>
-### Contenido 1
-
+<a name="item2"></a>
 **Pre-Requisito**
 
 Tener docker instalado 
@@ -57,7 +55,8 @@ En caso de estar los puertos en uso:
 
 
 
-**Instrucciones**
+<a name="item1"></a>
+### Instrucciones
 
 * Descargar repositorio, abriendo un terminal y pegando lo siguiente "git clone https://github.com/celeryx/test_latam.git"
 * Entrar a la carpeta "test_latam"
