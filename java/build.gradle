@@ -7,6 +7,7 @@ plugins {
 group = 'com.test'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '8'
+apply plugin: 'jacoco'
 
 configurations {
 	compileOnly {
@@ -22,7 +23,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.apache.commons:commons-lang3:3.9'
-	compile 'joda-time:joda-time:2.9.9'
 	compile 'org.springframework.boot:spring-boot-starter-webflux'
 	compile 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
 	compileOnly 'org.projectlombok:lombok'
@@ -30,20 +30,37 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 	compile 'org.hibernate:hibernate-validator:6.1.6.Final'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'junit:junit:4.13'
+	testImplementation 'com.squareup.okhttp3:mockwebserver:4.9.0'
 }
 
-jar {
-	doFirst {
-		manifest {
-			if (!configurations.compile.isEmpty()) {
-				attributes(
-						'Main-Class': 'com.test.latam.LatamApplicationTests')
-			}
-		}
-		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+
+jacoco {
+	toolVersion = "0.8.5"
+	reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.enabled false
+		csv.enabled false
+		html.destination file("${buildDir}/jacocoHtml")
+	}
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, excludes: ["com/test/latam/domain/**",
+										 "com/test/latam/LatamApplication**"])
+		}))
 	}
 }
 
 test {
-	useJUnitPlatform()
+	useJUnit()
+	filter {
+		//include all tests from package
+		includeTestsMatching "com.test.latam.*"
+	}
+	finalizedBy jacocoTestReport
 }

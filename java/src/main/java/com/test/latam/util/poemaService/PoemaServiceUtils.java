@@ -44,7 +44,7 @@ public class PoemaServiceUtils {
         return diasRestantes;
     }
 
-    public int ObtenerEdad(String fechaN) {
+    public int obtenerEdad(String fechaN) {
 
         LocalDate fechaNacimiento = formatearFecha(fechaN, Constants.FORMATO_FECHA_DDMMAAAA);
         LocalDate fechaH = obtenerFechaHoy();

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
-
 public class PoemaService {
 
     @Autowired
@@ -28,9 +27,9 @@ public class PoemaService {
     @Autowired
     private Messages messages;
 
-    public PoemaRS obtenerPoema(PoemaRQ req) {
+    /*public PoemaRS obtenerPoema(PoemaRQ req) {
         return new PoemaRS();
-    }
+    }*/
 
     public PoemaRS obtenerPoema(String nombres, String apellidos, String fechaN) {
 
@@ -40,7 +39,7 @@ public class PoemaService {
         Map<String, String> mapaApellidos = psu.obtenerNombresOApellidos(apellidos, Constants.APELLIDO_PATERNO,
                                                                          Constants.APELLIDO_MATERNO);
 
-        int edad = psu.ObtenerEdad(fechaN);
+        int edad = psu.obtenerEdad(fechaN);
         int diasProxCumple = psu.obtenerDiasRestantesCumple(fechaN);
         String poema = diasProxCumple <= 0 ? rpc.obtenerPoema(environment) : StringUtils.EMPTY;
 

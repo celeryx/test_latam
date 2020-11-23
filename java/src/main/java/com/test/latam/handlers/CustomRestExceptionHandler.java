@@ -33,7 +33,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     private Messages messages;
 
-    @Override
+    /*@Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatus status,
                                                                   WebRequest request) {
@@ -45,7 +45,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         return handleExceptionInternal(ex, apiError, headers, HttpStatus.BAD_REQUEST, request);
-    }
+    }*/
 
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,

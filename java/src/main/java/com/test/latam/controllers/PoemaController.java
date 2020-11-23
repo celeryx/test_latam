@@ -23,11 +23,11 @@ public class PoemaController {
     @Autowired
     PoemaService poemaService;
 
-    @CrossOrigin
+    /*@CrossOrigin
     @PostMapping("/poema")
     public ResponseEntity<PoemaRS> poema(@Valid @RequestBody PoemaRQ req){
         return new ResponseEntity<>(poemaService.obtenerPoema(req), HttpStatus.OK);
-    }
+    }*/
 
     @CrossOrigin
     @GetMapping("/poema")
