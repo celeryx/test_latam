@@ -1,6 +1,8 @@
 version: '3.5'
 services:
   latam-backend:
+    environment:
+      TZ: "America/Santiago"
     restart: always
     container_name: latam-backend
     build:

@@ -56,7 +56,7 @@ WORKDIR /home
 
 COPY java/ .
 
-RUN gradle clean build -x test
+RUN gradle clean build
 
 FROM openjdk:8-jdk-alpine
 

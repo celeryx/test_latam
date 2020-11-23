@@ -14,5 +14,5 @@ public class Poema {
     private String title;
     private String content;
     private String url;
-    private Poema poet;
+    private Poeta poet;
 }
